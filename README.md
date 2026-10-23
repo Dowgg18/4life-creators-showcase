@@ -108,8 +108,11 @@ A varredura muda só a fonte, da consulta direta para a API, e continua idempote
 
 Next.js (App Router) · React · TypeScript · Tailwind CSS · Medusa v2 · PostgreSQL · Resend · Docker · Traefik · GitHub Actions
 
-Veja também o [e-commerce da 4Life](https://github.com/Dowgg18/4life-nutrition-showcase).
+## Outros cases
+
+- [E-commerce da 4Life Nutrition](https://github.com/Dowgg18/4life-nutrition-showcase): loja com código próprio, do checkout à nota fiscal.
+- [Câmara Brasil-Rússia](https://github.com/Dowgg18/camara-brasil-russia-showcase): portal em português, russo e inglês com redação assistida por IA.
 
 ---
 
-Douglas Domingos · [github.com/Dowgg18](https://github.com/Dowgg18)
+Douglas Domingos · [github.com/Dowgg18](https://github.com/Dowgg18) · [LinkedIn](https://www.linkedin.com/in/douglas-c-domingos/)
