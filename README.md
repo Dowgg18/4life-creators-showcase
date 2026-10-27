@@ -1,8 +1,8 @@
 # 4Life Creators: plataforma de influenciadores
 
-![Creator Army 4Life](assets/10-creator-army.jpg)
+![Landing do Creator Army no celular](assets/20-lp-celular.jpg)
 
-O Creator Army é o programa de parceiros da 4Life Nutrition para influenciadores e criadores de conteúdo. A plataforma cuida de tudo, do recrutamento ao pagamento: aprova quem entra, dá um cupom para cada creator, apura a comissão de cada venda e organiza as campanhas de produto. Está no ar em [4lifenutrition.com.br/creator-army](https://4lifenutrition.com.br/creator-army).
+O Creator Army é o programa de parceiros da 4Life Nutrition para influenciadores e criadores de conteúdo. A plataforma cuida de tudo, do recrutamento ao pagamento: aprova quem entra, dá um cupom para cada creator, apura a comissão de cada venda e organiza as campanhas de produto. Desde outubro de 2026 ela tem domínio, banco, login e deploy próprios, em [creator.4lifenutrition.com.br](https://creator.4lifenutrition.com.br).
 
 > Repositório vitrine, publicado com autorização do cliente. O código é da 4Life e fica num repositório privado.
 
@@ -10,26 +10,28 @@ Sou o desenvolvedor responsável pela plataforma, do motor de comissão às tela
 
 ## Telas
 
-Todos os prints são de produção e só mostram páginas públicas. O portal logado e o painel da equipe têm dados de creators reais e ficaram de fora.
+As telas da plataforma aparecem com dados de demonstração. O portal e o painel de verdade têm dados de creators reais e não entram aqui.
 
-**Cadastro.** Formulário público, com cada ficha avaliada por uma pessoa da equipe antes de alguém ganhar acesso.
+**Landing.** Feita primeiro para o celular, porque quase todo mundo chega pelo Instagram. Cada tela tem uma ideia só: o cupom que vira comissão, o caminho de uma venda até o painel e o produto que chega em casa nas campanhas. A versão anterior ocupava 15 telas de altura no celular; esta cabe em 7.
 
-![Cadastro da creator](assets/11-cadastro.jpg)
+![Landing no desktop](assets/21-lp-desktop.jpg)
 
-| Entrada do portal (só por convite) | A creator escolhe o código do cupom |
+**Portal da creator, cadastro e entrada.** O resumo responde em 3 segundos quanto há a receber, quando libera e o que está em análise. O cadastro virou quatro etapas curtas, e o login segue o padrão de app, com ícone em cada campo e botão escuro.
+
+![Portal, cadastro e entrada no celular](assets/22-plataforma-celular.jpg)
+
+| Resumo no desktop | Fila da equipe |
 |---|---|
-| ![Entrar](assets/12-entrar.jpg) | ![Cupom](assets/13-cupom.jpg) |
+| ![Resumo no desktop](assets/23-plataforma-desktop.jpg) | ![Fila de inscrições](assets/24-equipe-fila.jpg) |
 
 ## Como funciona
 
-1. A landing do Creator Army apresenta o programa e leva ao cadastro. Ela nasceu para recrutar creators num evento presencial e depois virou página de campanha.
-2. A creator preenche o formulário público e a ficha cai numa fila no painel. A equipe aprova ou recusa. Ficha que ninguém avalia é apagada em 7 dias, porque ela guarda CPF, endereço e chave Pix de quem ainda não é parceira.
-3. Quem é aprovada recebe por e-mail um link que vale 7 dias e só para o e-mail convidado. No convite ela cria a senha e preenche os dados, o endereço e a chave Pix, validada no servidor.
-4. No primeiro acesso, a creator cria o próprio cupom. O sistema sugere um código a partir do Instagram ou do nome e confere contra todos os cupons da loja. Para trocar depois, ela pede e a equipe aprova. As vendas do cupom antigo continuam contando para ela.
-5. O cupom é uma promoção nativa da loja, então o checkout não precisa de nenhum caminho especial. A venda conta para a creator pelo cupom do pedido, sem cookie nem pixel.
-6. O portal foi feito para o celular, com quatro abas: Início, Extrato, Campanhas e Meus dados.
-7. Nas campanhas de produto, a equipe define produto, regras, referências, período e número de vagas. A creator escolhe o sabor, confirma o endereço e se inscreve. Cada participação aprovada vira um pedido de envio com valor zero dentro da loja, sem disparar os e-mails de compra.
-8. No painel, a equipe tem a fila de cadastros, a ficha de cada creator, as trocas de cupom, as campanhas, o registro de pagamentos e a exportação da lista de contato em CSV.
+1. A landing apresenta o programa e leva ao cadastro.
+2. A creator preenche o formulário público e a ficha cai numa fila no painel. A equipe aprova, com o percentual combinado, ou recusa. Ficha que ninguém avalia é apagada em 7 dias, porque ela guarda CPF, endereço e chave Pix de quem ainda não é parceira.
+3. Quem é aprovada recebe por e-mail um link que vale 7 dias e só funciona uma vez. Antes de criar a senha, ela confere a chave Pix que vai receber a comissão.
+4. A creator ganha um cupom só dela, conferido contra todos os cupons da loja. O cupom é uma promoção nativa da loja, então o checkout não precisa de nenhum caminho especial. A venda conta para a creator pelo cupom do pedido, sem cookie nem pixel.
+5. Nas campanhas de produto, a equipe define produto, regras, período e número de vagas. A creator escolhe a variação, confirma o endereço e se inscreve. Cada participação aprovada vira um pedido de envio com valor zero dentro da loja, sem disparar os e-mails de compra.
+6. No painel, a equipe tem a fila de cadastros, a ficha de cada creator, as comissões em análise, os membros da equipe e o registro de pagamentos.
 
 ## A comissão
 
@@ -53,31 +55,25 @@ flowchart TD
 
 A comissão só nasce quando o dinheiro entra. Pix e boleto compensam depois do pedido, e a varredura espera por isso. Se ela ficar parada por um deploy ou uma fila fora do ar, a passada seguinte recupera o que faltou. Um índice único por pedido impede comissão em dobro.
 
-A base é o valor dos produtos já com o desconto do cupom, sem frete e sem imposto, calculada em centavos inteiros. A comissão fica em processamento durante os 30 dias da janela de devolução e só então passa a "a receber".
+A base é o valor dos produtos já com o desconto do cupom, sem frete e sem imposto, calculada em centavos inteiros. A comissão fica em processamento durante os 30 dias da janela de devolução e só então passa a "a receber". O status nunca é gravado: ele é derivado na hora da leitura, então não existe job que precise virar "processamento" em "a receber" e possa falhar.
 
-Pedido cancelado ou estornado anula a comissão. Se ela já tinha sido paga, o acerto aparece no extrato e sai do próximo pagamento. Venda suspeita (o e-mail ou o CPF do comprador são os da creator, dois cupons de creator no mesmo pedido, creator pausada) não é bloqueada. Ela fica em análise e uma pessoa decide.
+Pedido cancelado ou estornado anula a comissão. Se ela já tinha sido paga, o acerto aparece no extrato e sai do próximo pagamento. Venda suspeita não é bloqueada: ela fica em análise e uma pessoa decide.
 
-O Pix é feito pela 4Life. A equipe registra o pagamento no painel, só entram comissões que já estão a receber, e no extrato da creator elas passam a "paga".
+## Design: da referência ao sistema
 
-## Portal da creator
+O dono do projeto mandou uma referência de app de creators: cartão de saldo grande com brilho, navegação em pílula escura, login limpo. A pedido dele, três propostas independentes traduziram a referência para a identidade da 4Life por ângulos diferentes (fiel à referência, orgânica da marca e clareza do dinheiro), e uma avaliação comparou as três antes de virar uma especificação única.
 
-O Início foi desenhado em cima de uma regra: abrir no celular e saber em 3 segundos quanto tem a receber, quando libera e qual é o cupom. O saldo a receber fica em destaque, o cupom tem botão de copiar, e logo abaixo vêm os saldos em processamento, já recebido e em análise, o desempenho e as últimas vendas. No primeiro acesso, em vez de um "R$ 0,00" desanimador, a tela dá boas-vindas e mostra o próximo passo.
-
-O Extrato lista cada venda e cada pagamento, com filtro de período, e não mostra nenhum dado de quem comprou. Campanhas traz as campanhas abertas com regras e referências, e Meus dados guarda cadastro, endereço, chave Pix e cupom.
-
-## Painel da equipe
-
-Os cargos negam por padrão: a gestão de creators vê só a área de creators, e o administrador vê tudo. A exportação em CSV traz contato e endereço, e deixa de fora chave Pix, comissão, cupom e valores. Um botão "Apurar agora" roda a varredura na hora, sem esperar os 5 minutos.
+Venceu a clareza do dinheiro, com enxertos das outras duas. A peça que melhor mostra a escolha é a régua "Quando libera": onde a referência tinha um gráfico de engajamento, o portal mostra a data e o valor de cada liberação dos próximos 30 dias. É a pergunta que a creator faz de verdade. "Em análise" fica fora da régua, porque não tem data. O lima da marca é usado só no que é da creator, numa lista fechada de lugares, e todas as combinações de cor foram medidas para passar no contraste AA.
 
 ## Segurança
 
-Cada entrega passou por revisão adversarial, e o portal teve um teste de intrusão em produção. A revisão pegou dois problemas antes de irem ao ar. O primeiro: qualquer pessoa com o link do convite conseguia gravar a própria chave Pix na conta de outra creator. O segundo: dava para inscrever alguém com o e-mail dela e a chave Pix de outra pessoa. Hoje o convite só vale para o e-mail convidado, e a chave aparece na tela para a creator conferir.
+Cada entrega passou por revisão adversarial, e o portal teve um teste de intrusão em produção. A revisão pegou problemas antes de irem ao ar, como um convite que deixava gravar a chave Pix na conta de outra pessoa. Hoje o convite só vale para o e-mail convidado, e a chave aparece na tela para a creator conferir.
+
+Na plataforma nova, a senha é guardada com scrypt, a sessão vive no banco e só o hash do token fica gravado. O login responde igual para e-mail inexistente e senha errada, tem limite de tentativas, e pausar uma creator derruba a sessão dela na hora. As telas da equipe conferem a sessão antes de qualquer consulta ao banco.
 
 ## Arquitetura
 
-O programa nasceu como um módulo do backend Medusa v2 da loja, com o portal dentro do storefront Next.js. A comissão lia os pedidos direto no mesmo Postgres.
-
-Em dois meses ele cresceu para um produto à parte, com cerca de 2.700 linhas de módulo, 26 rotas e 13 telas. Todo deploy do programa era um deploy da loja, e vice-versa. Em outubro de 2026 decidi separar os dois, e a migração está em andamento.
+O programa nasceu como um módulo do backend Medusa v2 da loja, com o portal dentro do storefront Next.js. Em dois meses cresceu para um produto à parte, e todo deploy do programa era um deploy da loja. Em outubro de 2026 decidi separar os dois.
 
 ```mermaid
 flowchart TB
@@ -100,13 +96,13 @@ flowchart TB
     B -- pedido de envio --> O
 ```
 
-O app novo tem repositório, banco, login e deploy próprios, e nunca abre conexão com o banco da loja. Ele fala só pela API admin do Medusa, com uma chave dedicada e restrita, do lado da loja, a uma lista fechada de 7 rotas.
+O app novo tem repositório, banco, login e deploy próprios, e nunca abre conexão com o banco da loja. Ele fala com a loja só pela API admin do Medusa, numa lista fechada de 7 rotas: o próprio cliente da API recusa qualquer chamada fora dela, e a chave dedicada da integração nasce restrita a essas rotas. O deploy também é separado: um usuário próprio no servidor que só consegue rodar o script de deploy do programa, com volta automática para a versão anterior se a verificação de saúde falhar.
 
-A varredura muda só a fonte, da consulta direta para a API, e continua idempotente. Foi isso que tornou a separação segura: não há fila de eventos para manter sincronizada. A troca roda em sombra: o app novo recalcula toda comissão ao lado do antigo, e um relatório diário compara pedido a pedido. O corte só acontece depois de 7 dias sem nenhuma diferença, e até lá qualquer passo pode ser desfeito.
+**Onde a migração está.** A landing nova já roda no domínio próprio. O cadastro, o portal e o painel da equipe estão prontos e testados de ponta a ponta, atrás de uma chave que mantém tudo fechado até o corte. As creators de verdade continuam no portal antigo até lá. A varredura muda só a fonte, da consulta direta para a API, e continua idempotente. Antes do corte ela roda em sombra, recalculando toda comissão ao lado da antiga, e a troca só acontece depois de 7 dias sem nenhuma diferença.
 
 ## Stack
 
-Next.js (App Router) · React · TypeScript · Tailwind CSS · Medusa v2 · PostgreSQL · Resend · Docker · Traefik · GitHub Actions
+Next.js (App Router) · React · TypeScript · Tailwind CSS · Drizzle · PostgreSQL · Medusa v2 · Resend · Docker · Traefik · GitHub Actions · Playwright
 
 ## Outros cases
 
