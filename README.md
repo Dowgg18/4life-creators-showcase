@@ -16,13 +16,23 @@ As telas da plataforma aparecem com dados de demonstração. O portal e o painel
 
 ![Landing no desktop](assets/21-lp-desktop.jpg)
 
-**Portal da creator, cadastro e entrada.** O resumo responde em 3 segundos quanto há a receber, quando libera e o que está em análise. O cadastro virou quatro etapas curtas, e o login segue o padrão de app, com ícone em cada campo e botão escuro.
+**Portal da creator.** O resumo responde em 3 segundos quanto há a receber, quando libera e o que está em análise. O extrato soma cada estado no próprio filtro, e cada venda mostra quanto falta para liberar. No celular a navegação fica embaixo, ao alcance do polegar, com o nome em todas as abas.
 
-![Portal, cadastro e entrada no celular](assets/22-plataforma-celular.jpg)
+![Resumo, extrato e dados no celular](assets/22-plataforma-celular.jpg)
 
-| Resumo no desktop | Fila da equipe |
+**Campanhas de produto.** A creator vê as campanhas abertas, escolhe o sabor, confirma o endereço e se inscreve. Quem já se inscreveu abre a campanha e encontra o resultado no topo, antes da foto e das regras.
+
+![Campanhas no celular](assets/25-campanhas-celular.jpg)
+
+![Resumo no desktop](assets/23-plataforma-desktop.jpg)
+
+**Painel da equipe.** A fila de inscrições, a ficha de cada campanha com quem se inscreveu, e as comissões com quanto está liberado para pagar. Ação que apaga dado ou tira acesso pede um segundo clique no mesmo lugar, sem modal, e tem Voltar.
+
+| Fila de inscrições | Campanha |
 |---|---|
-| ![Resumo no desktop](assets/23-plataforma-desktop.jpg) | ![Fila de inscrições](assets/24-equipe-fila.jpg) |
+| ![Fila de inscrições](assets/24-equipe-fila.jpg) | ![Ficha da campanha](assets/26-equipe-campanha.jpg) |
+
+![Comissões da equipe](assets/27-equipe-comissoes.jpg)
 
 ## Como funciona
 
@@ -30,7 +40,7 @@ As telas da plataforma aparecem com dados de demonstração. O portal e o painel
 2. A creator preenche o formulário público e a ficha cai numa fila no painel. A equipe aprova, com o percentual combinado, ou recusa. Ficha que ninguém avalia é apagada em 7 dias, porque ela guarda CPF, endereço e chave Pix de quem ainda não é parceira.
 3. Quem é aprovada recebe por e-mail um link que vale 7 dias e só funciona uma vez. Antes de criar a senha, ela confere a chave Pix que vai receber a comissão.
 4. A creator ganha um cupom só dela, conferido contra todos os cupons da loja. O cupom é uma promoção nativa da loja, então o checkout não precisa de nenhum caminho especial. A venda conta para a creator pelo cupom do pedido, sem cookie nem pixel.
-5. Nas campanhas de produto, a equipe define produto, regras, período e número de vagas. A creator escolhe a variação, confirma o endereço e se inscreve. Cada participação aprovada vira um pedido de envio com valor zero dentro da loja, sem disparar os e-mails de compra.
+5. Nas campanhas de produto, a equipe escolhe o produto no catálogo da loja e define regras, período e número de vagas. A creator escolhe o sabor, confirma o endereço e se inscreve. Duas inscrições ao mesmo tempo não furam o limite de vagas, e quem não foi selecionada não volta para a fila. Cada participação selecionada vira um pedido de envio com valor zero dentro da loja, sem disparar os e-mails de compra.
 6. No painel, a equipe tem a fila de cadastros, a ficha de cada creator, as comissões em análise, os membros da equipe e o registro de pagamentos.
 
 ## A comissão
@@ -63,7 +73,7 @@ Pedido cancelado ou estornado anula a comissão. Se ela já tinha sido paga, o a
 
 O dono do projeto mandou uma referência de app de creators: cartão de saldo grande com brilho, navegação em pílula escura, login limpo. A pedido dele, três propostas independentes traduziram a referência para a identidade da 4Life por ângulos diferentes (fiel à referência, orgânica da marca e clareza do dinheiro), e uma avaliação comparou as três antes de virar uma especificação única.
 
-Venceu a clareza do dinheiro, com enxertos das outras duas. A peça que melhor mostra a escolha é a régua "Quando libera": onde a referência tinha um gráfico de engajamento, o portal mostra a data e o valor de cada liberação dos próximos 30 dias. É a pergunta que a creator faz de verdade. "Em análise" fica fora da régua, porque não tem data. O lima da marca é usado só no que é da creator, numa lista fechada de lugares, e todas as combinações de cor foram medidas para passar no contraste AA.
+Venceu a clareza do dinheiro, com enxertos das outras duas. Depois de pronta, a plataforma passou por uma crítica de design em duas avaliações independentes: uma revisão pelas heurísticas de Nielsen e um detector automático de anti-padrões. O detector não achou nada. A revisão deu 23 de 40 e virou uma rodada de correções: confirmação nas ações que apagam dado, nomes nas abas do celular, totais para a equipe e o resultado da campanha no topo da tela. A peça que melhor mostra a escolha é a régua "Quando libera": onde a referência tinha um gráfico de engajamento, o portal mostra a data e o valor de cada liberação dos próximos 30 dias. É a pergunta que a creator faz de verdade. "Em análise" fica fora da régua, porque não tem data. O lima da marca é usado só no que é da creator, numa lista fechada de lugares, e todas as combinações de cor foram medidas para passar no contraste AA.
 
 ## Segurança
 
@@ -98,7 +108,7 @@ flowchart TB
 
 O app novo tem repositório, banco, login e deploy próprios, e nunca abre conexão com o banco da loja. Ele fala com a loja só pela API admin do Medusa, numa lista fechada de 7 rotas: o próprio cliente da API recusa qualquer chamada fora dela, e a chave dedicada da integração nasce restrita a essas rotas. O deploy também é separado: um usuário próprio no servidor que só consegue rodar o script de deploy do programa, com volta automática para a versão anterior se a verificação de saúde falhar.
 
-**Onde a migração está.** A landing nova já roda no domínio próprio. O cadastro, o portal e o painel da equipe estão prontos e testados de ponta a ponta, atrás de uma chave que mantém tudo fechado até o corte. As creators de verdade continuam no portal antigo até lá. A varredura muda só a fonte, da consulta direta para a API, e continua idempotente. Antes do corte ela roda em sombra, recalculando toda comissão ao lado da antiga, e a troca só acontece depois de 7 dias sem nenhuma diferença.
+**Onde a migração está.** A landing nova já roda no domínio próprio. O cadastro, o portal, as campanhas e o painel da equipe estão prontos e testados de ponta a ponta, atrás de uma chave que mantém tudo fechado até o corte. As creators de verdade continuam no portal antigo até lá. A varredura muda só a fonte, da consulta direta para a API, e continua idempotente. Antes do corte ela roda em sombra, recalculando toda comissão ao lado da antiga, e a troca só acontece depois de 7 dias sem nenhuma diferença.
 
 ## Stack
 
