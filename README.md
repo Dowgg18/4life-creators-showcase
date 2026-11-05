@@ -10,7 +10,14 @@ Sou o desenvolvedor responsável pela plataforma, do motor de comissão às tela
 
 ## Telas
 
-As telas da plataforma aparecem com dados de demonstração. O portal e o painel de verdade têm dados de creators reais e não entram aqui.
+Os prints foram tirados em 05/11/2026, da versão atual do código (`main`), rodando localmente com o banco de demonstração do próprio repositório: creators, vendas, CPF, chave Pix e endereço são todos inventados. O portal e o painel de verdade têm dados de creators reais e não entram aqui.
+
+| | Situação em 05/11/2026 |
+|---|---|
+| Landing | **Em produção** em creator.4lifenutrition.com.br |
+| Cadastro, portal da creator, campanhas e painel da equipe | **Prontos**, testados de ponta a ponta, fechados até o corte |
+| Integração com a loja pela API admin (apuração, cupom, Pix, envio) | **Em desenvolvimento**, num PR ainda aberto |
+| Registro de pagamento pela equipe | Existe só no portal antigo. Na plataforma nova o pagamento é Pix manual, e o saque automático está fora do escopo atual |
 
 **Landing.** Feita primeiro para o celular, porque quase todo mundo chega pelo Instagram. Cada tela tem uma ideia só: o cupom que vira comissão, o caminho de uma venda até o painel e o produto que chega em casa nas campanhas. A versão anterior ocupava 15 telas de altura no celular; esta cabe em 7.
 
@@ -18,7 +25,9 @@ As telas da plataforma aparecem com dados de demonstração. O portal e o painel
 
 **Portal da creator.** O resumo responde em 3 segundos quanto há a receber, quando libera e o que está em análise. O extrato soma cada estado no próprio filtro, e cada venda mostra quanto falta para liberar. No celular a navegação fica embaixo, ao alcance do polegar, com o nome em todas as abas.
 
-![Resumo, extrato e dados no celular](assets/22-plataforma-celular.jpg)
+![Resumo, extrato e campanhas no celular](assets/22-plataforma-celular.jpg)
+
+![Extrato no desktop, com o total de cada estado no filtro](assets/28-extrato-desktop.jpg)
 
 **Campanhas de produto.** A creator vê as campanhas abertas, escolhe o sabor, confirma o endereço e se inscreve. Quem já se inscreveu abre a campanha e encontra o resultado no topo, antes da foto e das regras.
 
@@ -32,7 +41,9 @@ As telas da plataforma aparecem com dados de demonstração. O portal e o painel
 |---|---|
 | ![Fila de inscrições](assets/24-equipe-fila.jpg) | ![Ficha da campanha](assets/26-equipe-campanha.jpg) |
 
-![Comissões da equipe](assets/27-equipe-comissoes.jpg)
+| Comissões | Ficha da creator |
+|---|---|
+| ![Comissões da equipe](assets/27-equipe-comissoes.jpg) | ![Ficha da creator, com saldo, acesso e vendas](assets/29-equipe-ficha.jpg) |
 
 ## Como funciona
 
@@ -41,7 +52,7 @@ As telas da plataforma aparecem com dados de demonstração. O portal e o painel
 3. Quem é aprovada recebe por e-mail um link que vale 7 dias e só funciona uma vez. Antes de criar a senha, ela confere a chave Pix que vai receber a comissão.
 4. A creator ganha um cupom só dela, conferido contra todos os cupons da loja. O cupom é uma promoção nativa da loja, então o checkout não precisa de nenhum caminho especial. A venda conta para a creator pelo cupom do pedido, sem cookie nem pixel.
 5. Nas campanhas de produto, a equipe escolhe o produto no catálogo da loja e define regras, período e número de vagas. A creator escolhe o sabor, confirma o endereço e se inscreve. Duas inscrições ao mesmo tempo não furam o limite de vagas, e quem não foi selecionada não volta para a fila. Cada participação selecionada vira um pedido de envio com valor zero dentro da loja, sem disparar os e-mails de compra.
-6. No painel, a equipe tem a fila de cadastros, a ficha de cada creator, as comissões em análise, os membros da equipe e o registro de pagamentos.
+6. No painel, a equipe tem a fila de cadastros, a ficha de cada creator, as comissões em análise e os membros da equipe. O pagamento é um Pix feito pela equipe; no portal antigo ele é registrado no painel, e na plataforma nova essa tela ainda não existe.
 
 ## A comissão
 
